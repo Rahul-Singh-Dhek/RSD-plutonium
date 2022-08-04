@@ -1,2 +1,3 @@
 # plutonium
-Day 2 of Setup
+Day 2 of SetupRD is BAD
+
