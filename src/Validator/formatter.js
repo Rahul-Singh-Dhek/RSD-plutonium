@@ -10,6 +10,6 @@ function changeToUpperCase(){
     let str = "rahul singh dhek"
     console.log("Text is ",str,"--->",str.toUpperCase());
 }
-module.exports.mytrim=trim();
-module.exports.myLowerCase=changetoLowerCase();
-module.exports.myUpperCase=changeToUpperCase();
+module.exports.mytrim=trim;
+module.exports.myLowerCase=changetoLowerCase;
+module.exports.myUpperCase=changeToUpperCase;
