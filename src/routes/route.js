@@ -53,6 +53,7 @@ router.get('/films/:filmId',function(req,res){
         let id=obj[i].id;
         if(id==gID){
             result=obj[i];
+            break;
         }
     }
     res.send(result||"No movie exists with this id")
