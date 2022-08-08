@@ -3,6 +3,7 @@ const abc = require('../logger/logger.js')
 const helper=require("../util/helper.js")
 const formatter=require("../Validator/formatter.js")
 const router = express.Router();
+const lodash=require('lodash');
 
 
 router.get('/test-me', function (req, res) {
@@ -20,7 +21,6 @@ router.get('/test-me', function (req, res) {
     // problem 4 and Problem 5
     const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 console.log(lodash.chunk(months,3));
-    res.send('My second ever api!');
 const oddno=[1,3,5,7,9,11,13,15,17,19];
 console.log("Lodash.tail output is---->",lodash.tail(oddno));
 const one=[1,2,2,3]
