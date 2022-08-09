@@ -4,6 +4,36 @@ const underscore = require('underscore')
 
 const router = express.Router();
 
+//----------------------------------------------------------9 August Assignment----------------------------------------------------------------------------------------------------------
+//Problem Statement 1--------------------------------------------------------------------------------------------------------------------
+router.get("/sol1",function(req,res){
+    let arr=[1,2,3,5,6,7];
+    let sumOfArr=0;
+    for(let i=0;i<arr.length;i++){
+        sumOfArr=arr[i]+sumOfArr;
+    }
+    let n=arr[arr.length-1];
+    let realSum=n*(n+1)/2;
+    let missingNumber=realSum-sumOfArr;
+    res.send({"[1,2,3,5,6,7]":missingNumber});
+})
+//Problem Statement 2---------------------------------------------------------------------------------------------------------------------------
+router.get("/sol2",function(req,res){
+    let arr=[33,34,35,37,38];
+    let sumOfArr=0;
+    for(let i=0;i<arr.length;i++){
+        sumOfArr=arr[i]+sumOfArr;
+    }
+    let f=arr[0];
+    let l=arr[arr.length-1];
+    let n=arr.length+1;
+    let realSum=n*(f+l)/2;
+    let missingNumber=realSum-sumOfArr;
+    res.send({"[...arr]":missingNumber});
+})
+
+//--------------------------------------------------------------------------------------------------------------------------------------
+
 router.get('/test-me', function (req, res) {
     myHelper.printDate()
     myHelper.getCurrentMonth()
