@@ -29,11 +29,11 @@ router.get("/sol2",function(req,res){
     let n=arr.length+1;
     let realSum=n*(f+l)/2;
     let missingNumber=realSum-sumOfArr;
-    res.send({"[...arr]":missingNumber});
+    res.send({"[33,34,35,37,38]":missingNumber});
 })
 
 //--------------------------------------------------------------------------------------------------------------------------------------
-
+//--------------------------------------------------------------------------------------------------------------------------------------
 router.get('/test-me', function (req, res) {
     myHelper.printDate()
     myHelper.getCurrentMonth()
