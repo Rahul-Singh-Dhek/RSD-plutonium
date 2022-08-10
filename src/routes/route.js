@@ -1,20 +1,58 @@
 const express = require('express');
-const abc = require('../introduction/intro')
 const router = express.Router();
 
-router.get('/test-me', function (req, res) {
-    console.log('My batch is', abc.name)
-    abc.printName()
-    res.send('My second ever api!')
-});
+//-----------------------------------------------------------10 Aug Assignment---------------------------------------------------------------------------
 
+let players =
+    [
+        {
+            "name": "manish",
+            "dob": "1/1/1995",
+            "gender": "male",
+            "city": "jalandhar",
+            "sports": [
+                "swimming"
+            ]
+        },
+        {
+            "name": "gopal",
+            "dob": "1/09/1995",
+            "gender": "male",
+            "city": "delhi",
+            "sports": [
+                "soccer"
+            ],
+        },
+        {
+            "name": "lokesh",
+            "dob": "1/1/1990",
+            "gender": "male",
+            "city": "mumbai",
+            "sports": [
+                "soccer"
+            ],
+        },
+    ]
 
-router.get('/test-you', function(req, res){
-    res.send('This is the second routes implementation')
+router.post('/players', function (req, res) {
+    let Body = req.body;
+    console.log(Body);
+    let N1 = Body.name;
+    let match = false;
+    for (let i = 0; i < players.length; i++) {
+        let N2 = players[i].name
+        console.log(N2);
+        if (N1 == N2) {
+            match = true;
+            break;
+        }
+    }
+    if (match == false) {
+        players.push(Body);
+    }
+    res.send({ data: players, status: true })
 })
 
-router.get('/give-me-students-data',function(req, res){
-
-})
 module.exports = router;
+
 // adding this comment for no reason
