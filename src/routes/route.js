@@ -42,7 +42,7 @@ router.post('/players', function (req, res) {
         let N2 = players[i].name
         if (N1 == N2) {
             match = true;
-            break;
+           return res.send("Player already exists");
         }
     }
     if (match == false) {
