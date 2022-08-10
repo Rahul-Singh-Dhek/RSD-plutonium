@@ -36,12 +36,10 @@ let players =
 
 router.post('/players', function (req, res) {
     let Body = req.body;
-    console.log(Body);
     let N1 = Body.name;
     let match = false;
     for (let i = 0; i < players.length; i++) {
         let N2 = players[i].name
-        console.log(N2);
         if (N1 == N2) {
             match = true;
             break;
