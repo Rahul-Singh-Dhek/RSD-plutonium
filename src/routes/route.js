@@ -36,19 +36,18 @@ let persons =
     ]
 
     router.post("/persons",function(req,res){
-        votingAge=req.query.votingAge;
+        let votingAge=req.query.votingAge;
         let output=[];
         for(let i=0;i<persons.length;i++){
             let per=persons[i];
             if(per.age>votingAge){
-                persons[i].votingStatus=true;
-                output.push(per);
+                per.votingStatus=true;
+                output.push(per)
             }
         }
         res.send({Data:output,status:true});
     })
-
-
+    
 module.exports = router;
 
 // adding this comment for no reason
