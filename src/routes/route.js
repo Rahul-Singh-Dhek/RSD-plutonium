@@ -10,7 +10,7 @@ router.get('/listBook',bookController.listBooks)
 //------------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------
 router.post('/createCustomer',customerController.createCustomer);
-router.post('/customerList',customerController.customerList);
+router.get('/customerList',customerController.customerList);
 //-------------------------------------------------------------------------------------------------------------
 router.post("/createUser", UserController.createUser  )
 router.get("/getUsersData", UserController.getUsersData)

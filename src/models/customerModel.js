@@ -4,13 +4,13 @@ const customerSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    mobile:{
-        type:String,
-        unique:true,
-    },
     email:{
         type:String,
+        unique:true
     },
-    purchaseAmount:Number
+    mobile:{
+        type:String,
+        unique:false
+    }
 },{timestamps:true});
 module.exports=mongoose.model('customer',customerSchema);
