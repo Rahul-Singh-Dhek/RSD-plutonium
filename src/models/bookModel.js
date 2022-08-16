@@ -10,7 +10,7 @@ const bookSchema=new mongoose.Schema({
         type:Date,
         default:Date.now
     },
-    isPublished:Boolean,
+    isPublished:{type:Boolean,default:false},
     prices:{
         indianPrice:String,
         europePrice:String
