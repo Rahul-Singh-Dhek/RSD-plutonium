@@ -6,7 +6,7 @@ const bookController= require("../controllers/bookController.js")
 const customerController=require("../controllers/customerController.js")
 //------------------------------------------------Assignment/12 August-----------------------------------------------
 router.post('/createBook',bookController.createBook);
-router.get('/listBook',bookController.listBooks);
+router.get('/bookList',bookController.bookList);
 //------------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------
 router.post('/createCustomer',customerController.createCustomer);

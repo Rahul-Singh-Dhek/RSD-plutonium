@@ -5,9 +5,9 @@ const createBook=async function(req,res){
     res.send({Data:savedData});
 }
 
-const listBooks=async function(req,res){
-    let data=await bookModel.find();
+const bookList=async function(req,res){
+    let data=await bookModel.find().select({bookName:1,autherName:1,_id:0});
     res.send({Data:data})
 }
 module.exports.createBook=createBook;
-module.exports.listBooks=listBooks;
+module.exports.bookList=bookList;
