@@ -27,7 +27,9 @@ const getXINRBooks=async function(req,res){
     //let data=await bookModel.find({$or:[{prices:{indianPrice:"100INR"}},{prices:{indianPrice:"500INR"}}]})
     //let data=await bookModel.find({"prices.indianPrice":{$or:["100INR","200INR","500INR"]}})
     //let data=await bookModel.find({"prices.indianPrice":{$or:[{$eq:"100INR"},{$eq:"200INR"},{$eq:"500INR"}]}})
+    //-------------------------------------------------------------------------------------------------------------------------------
     let data=await bookModel.find({$or:[{"prices.indianPrice":"100INR"},{"prices.indianPrice":{$eq:"200INR"}},{"prices.indianPrice":{$eq:"500INR"}}]})
+    //let data=await bookModel.find({"prices.indianPrice":{$in:["100INR","200INR","500INR"]}});
     res.send({data:data})
 }
 const getRandomBooks=async function(res,res){
