@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const bookController= require("../controllers/bookController.js")
+const allController= require("../controllers/allController.js")
 
 //------------------------------------------------Assignment/16 August-----------------------------------------------
-router.post('/createBook',bookController.createBook);
-router.get('/bookList',bookController.bookList);
-router.post('/getBooksInYear',bookController.getBooksInYear);
-router.post('/getParticularBooks',bookController.getParticularBooks);
-router.post('/getXINRBooks',bookController.getXINRBooks);
-router.post('/getRandomBooks',bookController.getRandomBooks);
+router.post('/createBook',allController.createBook);
+router.post('/createAuther',allController.createAuther);
+router.post('/getChetanBhagatBooks',allController.getChetanBhagatBooks);
+router.post('/updateTwoStates',allController.updateTwoStates);
+router.post('/getAuthorbyPrice',allController.getAuthorbyPrice);
 //------------------------------------------------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------------------------------------------
