@@ -3,18 +3,24 @@ const autherModel=require('../models/autherModel.js');
 //-----------------------------------------------------17Aug Assignment----------------------------------------------------------------------------
 const createBook=async function(req,res){
     let data=req.body;
+    if(!data.author_id){
+        return res.send({status:false,msg:"author id must present"});
+    }
     let savedData=await bookModel.create(data);
     res.send({Data:savedData});
 }
 const createAuther=async function(req,res){
     let data=req.body;
+    if(!data.author_id){
+        return res.send({status:false,msg:"author id must present"});
+    }
     let savedData=await autherModel.create(data);
     res.send({Data:savedData});
 }
 
 const getChetanBhagatBooks=async function(req,res){
     let data=await autherModel.findOne({author_name:"Chetan Bhagat"}).select({author_id:1,_id:0})
-    console.log(data);
+    // console.log(data);
     let list=await bookModel.find(data);
     res.send({Data:list});
 }
@@ -31,11 +37,15 @@ const updateTwoStates=async function(req,res){
 
 const getAuthorbyPrice=async function(req,res){
     let data=await bookModel.find({price:{$gte : 50,$lte : 100}}).select({author_id:1,_id:0});
-    let output=[];
-    for(let i=0;i<data.length;i++){
-    let out= await autherModel.findOne(data[i]).select({author_name:1,_id:0});
-    output.push(out.author_name)
-    }
+    let out=data.map(x=>x.author_id);
+    // console.log(out);
+    let output=await autherModel.find({author_id:{$in:out}}).select({author_name:1,_id:0})
+    // let output=[];
+    // for(let i=0;i<data.length;i++){
+    //     // console.log(data[i]);
+    // let out= await autherModel.findOne(data[i]).select({author_name:1,_id:0});
+    // output.push(out.author_name)
+    // }
     // let output=data.map(x=>{
     //  let out = autherModel.findOne(x).select({author_name:1,_id:0});
     //  return out;
