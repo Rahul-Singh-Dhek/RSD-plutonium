@@ -3,6 +3,8 @@ const autherModel=require('../models/autherModel.js');
 //-----------------------------------------------------17Aug Assignment----------------------------------------------------------------------------
 const createBook=async function(req,res){
     let data=req.body;
+    // console.log(data.author_id);
+    // if(data.author_id==undefined){
     if(!data.author_id){
         return res.send({status:false,msg:"author id must present"});
     }
@@ -11,6 +13,7 @@ const createBook=async function(req,res){
 }
 const createAuther=async function(req,res){
     let data=req.body;
+    // if(data.author_id==undefined);
     if(!data.author_id){
         return res.send({status:false,msg:"author id must present"});
     }
