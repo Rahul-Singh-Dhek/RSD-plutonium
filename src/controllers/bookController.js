@@ -1,23 +1,69 @@
-const authorModel = require("../models/authorModel")
-const bookModel= require("../models/bookModel")
 
-const createBook= async function (req, res) {
-    let book = req.body
-    let bookCreated = await bookModel.create(book)
+const newAuthorModel = require("../models/newAuthorModel")
+const newBookModel= require("../models/newBookModel")
+const newPublisherModel = require("../models/newPublisherModel")
+
+
+const createNewBook= async function (req, res) {
+    let book = req.body;
+    let author=book.author;
+    let publisher=book.publisher;
+    if(!author){
+       return res.send({Error:"Author_ID is Compulasry"})
+    }else if (!publisher){
+       return res.send({Error:"Publisher_ID is Compulasry"})
+    }
+
+    author=await newAuthorModel.findOne({_id:author});
+    console.log(author)
+    if(!author){
+        return res.send({Error:"Author_ID is invalid"})
+    }
+    publisher=await newPublisherModel.findOne({_id:publisher});
+    if(!publisher){
+        return res.send({Error:"Publisher_ID is invalid"})
+    }
+
+    let bookCreated = await newBookModel.create(book)
+
     res.send({data: bookCreated})
 }
 
-const getBooksData= async function (req, res) {
-    let books = await bookModel.find()
-    res.send({data: books})
-}
-
-const getBooksWithAuthorDetails = async function (req, res) {
-    let specificBook = await bookModel.find().populate('author_id')
+const getBooksWithAllDetails = async function (req, res) {
+    let specificBook = await newBookModel.find().populate('author publisher')
     res.send({data: specificBook})
-
 }
 
-module.exports.createBook= createBook
-module.exports.getBooksData= getBooksData
-module.exports.getBooksWithAuthorDetails = getBooksWithAuthorDetails
+const books=async function(req,res){
+    
+    let savedHard=await newBookModel.find().populate({path:'publisher',match:{$or:[{name:"Penguin"} ,{name:"HarperCollins"}]}})
+    let sh=[]
+    savedHard.forEach(element => {
+        if(element.publisher!=null){
+            sh.push(element._id);
+        }
+    });
+    let ud=await newBookModel.updateMany(
+        {_id:sh},
+        {$set:{isHardCover:true}},
+        )
+//------------------------------------------------------------------------------------------------------------
+    let savedAuthor=await newBookModel.find().populate({path:'author',match:{rating:{$gt:3.5}}})
+    let sa=[]
+    savedAuthor.forEach(element => {
+            if(element.author!=null){
+                sa.push(element._id);
+            }
+    });
+    let ua=await newBookModel.updateMany(
+            {_id:sa},
+            {$inc:{price:+10}},
+            )
+
+    res.send({"Update Cover":ud,"Updated Prcie":ua,"Message":"Documents are succesfully Updated"})
+}
+
+
+module.exports.createNewBook= createNewBook
+module.exports.getBooksWithAllDetails = getBooksWithAllDetails
+module.exports.books=books
