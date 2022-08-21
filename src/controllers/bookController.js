@@ -35,7 +35,11 @@ const getBooksWithAllDetails = async function (req, res) {
 }
 
 const books=async function(req,res){
-    
+    // let savedHard=await newBookModel.find().populate({path:'publisher',match:{$or:[{name:"Penguin"} ,{name:"HarperCollins"}]}})
+    // .updateMany({publisher:{$ne : null}},
+    //      {$set:{isHardCover:false}},
+    //      {new:true})
+    //      res.send(savedHard);
     let savedHard=await newBookModel.find().populate({path:'publisher',match:{$or:[{name:"Penguin"} ,{name:"HarperCollins"}]}})
     let sh=[]
     savedHard.forEach(element => {
