@@ -43,24 +43,27 @@ const books=async function(req,res){
             sh.push(element._id);
         }
     });
-    let ud=await newBookModel.updateMany(
+    let ud=await newBookModel.find().updateMany(
         {_id:sh},
         {$set:{isHardCover:true}},
         )
 //------------------------------------------------------------------------------------------------------------
-    let savedAuthor=await newBookModel.find().populate({path:'author',match:{rating:{$gt:3.5}}})
+    let savedAuthor=(await newBookModel.find().populate('author')).filter(function(x){
+        if(x.author.rating>3.5){
+            return (x);
+        }})
     let sa=[]
     savedAuthor.forEach(element => {
-            if(element.author!=null){
                 sa.push(element._id);
             }
-    });
-    let ua=await newBookModel.updateMany(
+    );
+    let ua=await newBookModel.find().populate('author').updateMany(
             {_id:sa},
             {$inc:{price:+10}},
             )
 
     res.send({"Update Cover":ud,"Updated Prcie":ua,"Message":"Documents are succesfully Updated"})
+    // res.send(savedAuthor);
 }
 
 
