@@ -8,25 +8,28 @@ const createNewBook= async function (req, res) {
     let book = req.body;
     let author=book.author;
     let publisher=book.publisher;
-    if(!author){
-       return res.send({Error:"Author_ID is Compulasry"})
+    if(!author && !publisher){
+       return res.send({Error:"Author_ID and Publisher_ID is Compulasry"})
     }else if (!publisher){
        return res.send({Error:"Publisher_ID is Compulasry"})
+    }else if(!author){
+       return res.send({Error:"Author_ID is Compulasry"})
     }
 
     author=await newAuthorModel.findOne({_id:author});
-    console.log(author)
-    if(!author){
-        return res.send({Error:"Author_ID is invalid"})
-    }
     publisher=await newPublisherModel.findOne({_id:publisher});
-    if(!publisher){
+
+    if(!author && !publisher){
+        return res.send({Error:"Author_ID and Publisher_ID is invalid"})
+    }else if(!publisher){
         return res.send({Error:"Publisher_ID is invalid"})
+    }else if(!author){
+        return res.send({Error:"Author_ID is invalid"})
+    }else{
+        let bookCreated = await newBookModel.create(book)
+        res.send({data: bookCreated})
     }
 
-    let bookCreated = await newBookModel.create(book)
-
-    res.send({data: bookCreated})
 }
 
 const getBooksWithAllDetails = async function (req, res) {
