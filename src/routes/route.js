@@ -9,10 +9,18 @@ router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
 
+router.get("/MyName", function (req, res) {
+    res.send("My Name is RSD!")
+})
 
-
-
-router.post("/createBook", BookController.createBook  )
+router.post("/Product",function(req,res){
+    let body=req.body
+    let f=body.f
+    let s=body.s
+    let mul=f*s;
+    res.send({Product:mul});
+})
+router.post("/createBook", BookController.createBook)
 
 
 
