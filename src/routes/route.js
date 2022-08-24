@@ -13,7 +13,7 @@ router.get("/MyName", function (req, res) {
     res.send("My Name is RSD!")
 })
 
-router.post("/Product",function(req,res){
+router.post("/Product/name",function(req,res){
     let body=req.body
     let f=body.f
     let s=body.s

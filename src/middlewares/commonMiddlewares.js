@@ -1,15 +1,18 @@
-
+const moment = require('moment');
+// --------------------------------------------------------------------------------------------------------
 const globalMid = function (req, res, next) {
-    let date = new Date();
-    let day = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-    let time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
-    date = day + " " + time;
+//     let date = new Date();
+//     let day = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+//     let time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
+//    let timestamp = day + " " + time;
+const timestamp=new moment().format("YYYY-MM-DD h-mm-ss")
     let ip = req.socket.remoteAddress
     let route = req.originalUrl;
-    console.log(date + " " + "," + " " + ip + " " + "," + " " +route)
-    next();
+    // let route=req.route;
+    console.log(timestamp + " " + "," + " " + ip + " " + "," + " " +route)
+next();
 }
-
+// -------------------------------------------------------------------------------------------------------
 const mid1 = function (req, res, next) {
     req.falana = "hi there. i am adding something new to the req object"
     console.log("Hi I am a middleware named Mid1")
