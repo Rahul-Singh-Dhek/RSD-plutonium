@@ -1,26 +1,34 @@
 
+const productModel= require("../models/productModel")
+const UserModel= require("../models/userModel")
+
 const mid1= function ( req, res, next) {
-    req.falana= "hi there. i am adding something new to the req object"
-    console.log("Hi I am a middleware named Mid1")
+   if(req.headers.isfreeappuser){
+    req.isFreeAppUser=req.headers.isfreeappuser;
     next()
+}else{
+    res.send({Error:"isFreeAppUser header is necessary"})
+} 
+    }
+
+const mid2=async function(req,res,next){
+const data=req.body;
+const userExist=await UserModel.findOne({_id:data.userId})
+const productExist=await productModel.findOne({_id:data.productId})
+if(userExist && productExist){
+    next()
+}else if(!userExist && !productExist){
+    res.send({Error:"User and Product does not Exists"})
+}else if(!userExist){
+    res.send({Error:"User Does not Exists"})
+}else if(!productExist){
+    res.send({Error:"Product Does not Exists"})
 }
 
-const mid2= function ( req, res, next) {
-    console.log("Hi I am a middleware named Mid2")
-    next()
 }
 
-const mid3= function ( req, res, next) {
-    console.log("Hi I am a middleware named Mid3")
-    next()
-}
 
-const mid4= function ( req, res, next) {
-    console.log("Hi I am a middleware named Mid4")
-    next()
-}
+module.exports.mid2= mid2
 
 module.exports.mid1= mid1
-module.exports.mid2= mid2
-module.exports.mid3= mid3
-module.exports.mid4= mid4
+

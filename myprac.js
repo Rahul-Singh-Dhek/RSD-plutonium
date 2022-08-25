@@ -7,5 +7,6 @@ let obj={
 }
 console.log(obj["my-work"].sal);
 obj["my-name"]="MD";
+obj.tanmay="Tanmay"
 
-console.log(obj["my-name"]);
+console.log(obj);
