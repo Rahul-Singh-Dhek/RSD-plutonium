@@ -3,16 +3,13 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema( {
     firstName: String,
     lastName: String,
-    mobile: {
-        type: String,
-
-        required: true
-    },
+    mobile: String,
     emailId: String,
     password: String,
-    gender: {
-        type: String,
-        enum: ["male", "female", "other"]
+    gender:String,
+    isDeleted:{
+        type:String,
+        default:false
     },
     age: Number,
 }, { timestamps: true });
