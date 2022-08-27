@@ -16,7 +16,7 @@ const tokenHeader=function(req,res,next){
 const tokenCheck= function(req,res,next){
   let token = req.token;
     let decodedToken = jsonwebtoken.verify(token,"hbjsd&%#@ff6t36trwE$#$^&*jh");
-  console.log(decodedToken);
+  // console.log(decodedToken);
   if (!decodedToken){
     return res.send({ status: false, msg: "token is invalid" });
   }else{
@@ -29,7 +29,7 @@ const userCheck=async function(req,res,next){
   let decodedToken = req.decodedToken;
   let userId = req.params.userId;
   let userDetails = await userModel.findById(userId);
-  console.log(userDetails);
+  // console.log(userDetails);
   if (!userDetails){
     return res.send({ status: false, msg: "No such user exists" });
   }else if(decodedToken.userId==userDetails._id){
@@ -39,6 +39,24 @@ const userCheck=async function(req,res,next){
     return res.send({status: false, msg: "userID is not matching with the Token"})
   }
 }
+
+const loginCheck=async function(req,res,next){
+  let email = req.body.emailId;
+  let password = req.body.password;
+
+  let user = await userModel.findOne({ emailId: email, password: password });
+  if (!user){
+    return res.send({
+      status: false,
+      msg: "username or the password is not corerct",
+    });
+  }else{
+    req.user=user
+    next()
+  }
+}
 module.exports.tokenHeader=tokenHeader 
 module.exports.tokenCheck=tokenCheck  
 module.exports.userCheck=userCheck
+module.exports.loginCheck=loginCheck
+

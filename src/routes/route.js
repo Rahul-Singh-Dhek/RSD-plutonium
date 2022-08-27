@@ -5,7 +5,7 @@ const middleware=require("../middlewares/auth.js")
 
 router.post("/users", userController.createUser  )
 
-router.post("/login", userController.loginUser)
+router.post("/login",middleware.loginCheck, userController.loginUser)
 
 router.get("/users/:userId",middleware.tokenHeader,middleware.tokenCheck,middleware.userCheck,userController.getUserData)
 

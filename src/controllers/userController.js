@@ -8,29 +8,20 @@ const createUser = async function (req, res) {
 };
 
 const loginUser = async function (req, res) {
-  let email = req.body.emailId;
-  let password = req.body.password;
-
-  let user = await userModel.findOne({ emailId: email, password: password });
-  if (!user){
-    return res.send({
-      status: false,
-      msg: "username or the password is not corerct",
-    });
-  }else{
+let user=req.user
   let token = jsonwebtoken.sign(
     {
-      userId: user._id.toString(),
+      userId: user._id.toString(), 
       email:user.emailId,
       organisation: "FunctionUp",
     },
     "hbjsd&%#@ff6t36trwE$#$^&*jh"
   );
-  res.send({ status: true, token: token });}
+  res.send({ status: true, token: token });
 };
 
 const getUserData = function (req, res) {
-  data=req.userDetails
+  let data=req.userDetails
  res.send({ status: true, Data: data});
 };
 
@@ -52,4 +43,4 @@ module.exports.getUserData = getUserData;
 module.exports.updateUser = updateUser;
 module.exports.loginUser = loginUser;
 module.exports.deleteUser = deleteUser;
-
+ 
