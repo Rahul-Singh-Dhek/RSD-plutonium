@@ -6,9 +6,9 @@ const userSchema = new mongoose.Schema( {
     mobile: String,
     emailId: String,
     password: String,
-    gender:String,
+    gender:{type:String,enum:["male","female","other"]},
     isDeleted:{
-        type:String,
+        type:Boolean,
         default:false
     },
     age: Number,
