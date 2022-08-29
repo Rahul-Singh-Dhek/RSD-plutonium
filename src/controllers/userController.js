@@ -20,8 +20,8 @@ let user=req.user
   res.send({ status: true, token: token });
 };
 
-const getUserData = function (req, res) {
-  let data=req.userDetails
+const getUserData =async function (req, res) {
+  let data=await userModel.findById(req.params.userId)
  res.send({ status: true, Data: data});
 };
 

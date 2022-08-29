@@ -17,26 +17,17 @@ const tokenCheck= function(req,res,next){
   let token = req.token;
     let decodedToken = jsonwebtoken.verify(token,"hbjsd&%#@ff6t36trwE$#$^&*jh");
   // console.log(decodedToken);
-  if (!decodedToken){
-    return res.send({ status: false, msg: "token is invalid" });
-  }else{
     req["decodedToken"]=decodedToken;
     next();
-  }  
 }
 
-const userCheck=async function(req,res,next){
+const userAuthorisation= function(req,res,next){
   let decodedToken = req.decodedToken;
   let userId = req.params.userId;
-  let userDetails = await userModel.findById(userId);
-  // console.log(userDetails);
-  if (!userDetails){
-    return res.send({ status: false, msg: "No such user exists" });
-  }else if(decodedToken.userId==userDetails._id){
-    req.userDetails=userDetails;
+  if(decodedToken.userId==userId){
     next()
   }else{
-    return res.send({status: false, msg: "userID is not matching with the Token"})
+    return res.send({status: false, msg: "User does not have Permission for this Operation"})
   }
 }
 
@@ -57,6 +48,6 @@ const loginCheck=async function(req,res,next){
 }
 module.exports.tokenHeader=tokenHeader 
 module.exports.tokenCheck=tokenCheck  
-module.exports.userCheck=userCheck
+module.exports.userAuthorisation=userAuthorisation
 module.exports.loginCheck=loginCheck
 
