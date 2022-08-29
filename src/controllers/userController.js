@@ -7,7 +7,7 @@ const createUser = async function (req, res) {
   res.send({ msg: savedData });
 };
 
-const loginUser = async function (req, res) {
+const loginUser = function (req, res) {
 let user=req.user
   let token = jsonwebtoken.sign(
     {
