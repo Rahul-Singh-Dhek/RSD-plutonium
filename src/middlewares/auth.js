@@ -17,7 +17,6 @@ const loginCheck = async function (req, res, next) {
   }
 }
 
-
 const tokenHeader = function (req, res, next) {
   req.token = req.headers["x-Auth-token"];
   if (!req.token) {
@@ -35,7 +34,7 @@ const tokenCheck = function (req, res, next) {
   req["decodedToken"] = decodedToken;
   next();
   }catch(error){
-    res.status(500).send({msg:"Tokken is incorrect",Error:error})
+    res.send({msg:"Tokken is incorrect",Error:error})
   }
 }
 
