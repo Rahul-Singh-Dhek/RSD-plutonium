@@ -17,6 +17,7 @@ const loginCheck = async function (req, res, next) {
   }
 }
 
+
 const tokenHeader = function (req, res, next) {
   req.token = req.headers["x-Auth-token"];
   if (!req.token) {
@@ -31,7 +32,6 @@ const tokenHeader = function (req, res, next) {
 const tokenCheck = function (req, res, next) {
   try{let token = req.token;
   let decodedToken = jsonwebtoken.verify(token, "hbjsd&%#@ff6t36trwE$#$^&*jh");
-  // console.log(decodedToken);
   req["decodedToken"] = decodedToken;
   next();
   }catch(error){
