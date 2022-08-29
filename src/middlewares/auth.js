@@ -29,7 +29,8 @@ const tokenHeader = function (req, res, next) {
 }
 
 const tokenCheck = function (req, res, next) {
-  try{let token = req.token;
+  try{
+    let token = req.token;
   let decodedToken = jsonwebtoken.verify(token, "hbjsd&%#@ff6t36trwE$#$^&*jh");
   req["decodedToken"] = decodedToken;
   next();

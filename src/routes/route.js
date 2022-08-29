@@ -7,7 +7,7 @@ router.post("/users", userController.createUser  )
 
 router.post("/login",middleware.loginCheck, userController.loginUser)
 
-router.get("/users/:userId", middleware.tokenHeader, middleware.tokenCheck, middleware.userAuthorisation,userController.getUserData)
+router.get("/users/:userId/fetch", middleware.tokenHeader, middleware.tokenCheck, middleware.userAuthorisation,userController.getUserData)
 
 router.put("/users/:userId",middleware.tokenHeader,middleware.tokenCheck,middleware.userAuthorisation, userController.updateUser)
 
