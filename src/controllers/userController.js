@@ -4,7 +4,7 @@ const userModel = require("../models/userModel");
 const createUser = async function (req, res) {
   let data = req.body;
   let savedData = await userModel.create(data);
-  res.send({ msg: savedData });
+  res.status(201).send({ msg: savedData });
 };
 
 const loginUser = function (req, res) {
@@ -17,25 +17,25 @@ let user=req.user
     },
     "hbjsd&%#@ff6t36trwE$#$^&*jh"
   );
-  res.send({ status: true, token: token });
+  res.status(200).send({ status: true, token: token });
 };
 
 const getUserData =async function (req, res) {
   let data=await userModel.findById(req.params.userId)
- res.send({ status: true, Data: data});
+ res.status(200).send({ status: true, Data: data});
 };
 
 const updateUser = async function (req, res) {
   let userData = req.body;
   let userId=req.params.userId
   let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData,{new:true});
-  res.send({ status: true, data: updatedUser });
+  res.status(200).send({ status: true, data: updatedUser });
 };
 
 const deleteUser=async function(req,res){
   let userId=req.params.userId
   let delUser=await userModel.findOneAndUpdate({_id:userId},{isDeleted:true},{new:true})
-  res.send({ status: true, data: delUser })
+  res.send(200).send({ status: true, data: delUser })
 }
 
 module.exports.createUser = createUser;
