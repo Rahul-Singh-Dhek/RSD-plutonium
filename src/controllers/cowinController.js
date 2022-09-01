@@ -1,6 +1,22 @@
 let axios = require("axios")
-
-
+//-------------------------------------------Assignment/Axios Qusetion 1---------------------------------------------------------------
+let getByDistrictId = async function (req, res) {
+    try {
+        let id = req.query.district_id
+        let date = req.query.date
+        let options = {
+            method: "get",
+            url: `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=${id}&date=${date}`
+        }
+        let result = await axios(options);
+        let data = result.data
+        res.status(200).send({ data: data, status: true })
+    }
+    catch (err) {
+        res.status(500).send({ Error: err.message ,status:false})
+    }
+}
+//---------------------------------------------------------------------------------------------------------------------------------------
 let getStates = async function (req, res) {
 
     try {
@@ -60,7 +76,7 @@ let getByPin = async function (req, res) {
 let getOtp = async function (req, res) {
     try {
         let blahhh = req.body
-        
+
         console.log(`body is : ${blahhh} `)
         var options = {
             method: "post",
@@ -83,3 +99,4 @@ module.exports.getStates = getStates
 module.exports.getDistricts = getDistricts
 module.exports.getByPin = getByPin
 module.exports.getOtp = getOtp
+module.exports.getByDistrictId = getByDistrictId
